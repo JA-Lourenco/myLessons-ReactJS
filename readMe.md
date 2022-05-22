@@ -1,6 +1,6 @@
 ## Intruções para executar o projeto
 
-1 - Antes de executar o projeto React, no JSON server é importante excluir a flag do arquivo package-json do passo 1:
+1 - Antes de executar o projeto React, no JSON server é importante excluir a flag do arquivo package-json do passo 2:
 
 <code>--host {hostname}</code>
 
