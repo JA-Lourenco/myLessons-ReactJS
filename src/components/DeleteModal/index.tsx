@@ -9,16 +9,12 @@ import { Container, ButtonArea } from './styles'
 interface DeleteModalProps {
     isOpen: boolean
     onRequestClose: () => void
+    handleDelete: () => void
 }
 
-export function DeleteModal({ isOpen, onRequestClose }: DeleteModalProps) {
+export function DeleteModal({ isOpen, onRequestClose, handleDelete }: DeleteModalProps) {
 
     const navigate = useNavigate()
-
-    function handleDelete() {
-        navigate('/')
-        onRequestClose()
-    }
 
     return (
             <Modal
@@ -28,12 +24,10 @@ export function DeleteModal({ isOpen, onRequestClose }: DeleteModalProps) {
                 className='react-modal-content'
             >
                 <Container>
-                    <h2>Confirma a exclusão?</h2>
+                    <h2>Atenção</h2>
 
-                    <p>Deseja remover o registro?</p>
+                    <p>Confirma a remoção da matéria?</p>
 
-                    <hr />
-                    
                     <ButtonArea>
                         <Button 
                             title='Cancelar'

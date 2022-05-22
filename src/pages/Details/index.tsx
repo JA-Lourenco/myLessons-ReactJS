@@ -82,7 +82,18 @@ export function Details() {
 
     function handleBackToHome() {
         navigate('/')
-    }    
+    }
+    
+    async function handleDeleteLesson() {
+        try {
+            await api.delete(`/Lessons/${id}`)
+            alert('Registro removido com sucesso!')
+            navigate('/')
+        } catch (error) {
+            console.log('Screen: Details\nFunction: handleDeleteLesson\nerror:', error)
+            alert('Não foi possível remover o registro!')
+        }
+    }
 
     useEffect(() => {
         async function handleGetLesson() {
@@ -104,7 +115,7 @@ export function Details() {
     
             } catch (error) {
                 console.log('Screen: Details\nFunction: handleGetLesson\nerror:', error)
-                alert('Não foi carregar os dados da Matéria')
+                alert('Não foi possível carregar os dados da Matéria!')
             } 
         }
 
@@ -165,6 +176,7 @@ export function Details() {
             <DeleteModal 
                 isOpen={isDeleteModalOpen}
                 onRequestClose={handleIsDeleteModalClose}
+                handleDelete={handleDeleteLesson}
             />
         </Container>
     )
