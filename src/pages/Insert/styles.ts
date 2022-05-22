@@ -8,7 +8,7 @@ export const Container = styled.div`
     flex-direction: column;
 `
 
-export const Header = styled.section`
+export const Header = styled.header`
     width: 70%;
     height: 80px;
     padding: 20px;

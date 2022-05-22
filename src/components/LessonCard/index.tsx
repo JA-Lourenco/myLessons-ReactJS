@@ -46,7 +46,7 @@ export function LessonCard({
                 }
             </Days>
 
-            <Obs disabled>{obs}</Obs>
+            <Obs value={obs} disabled />
         </Container>
     )
 }

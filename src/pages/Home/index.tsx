@@ -92,7 +92,7 @@ export function Home() {
     }
 
     function handleEdit() {
-        navigate('/update')
+        navigate('/details')
     }
 
     return (

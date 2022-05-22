@@ -8,7 +8,7 @@ export const Container = styled.div`
     flex-direction: column;
 `
 
-export const Header = styled.section`
+export const Header = styled.header`
     width: 80%;
     height: 80px;
     padding: 20px;
@@ -18,18 +18,20 @@ export const Header = styled.section`
     position: relative;
 `
 
-export const Content = styled.form`
+export const Content = styled.section`
     width: 40%;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: flex-start;
-    border: 1px solid var(--gray);
     padding: 30px;
-    margin-top: 30px;
+    /* margin-top: 30px; */
+`
+
+export const Obs = styled.h4`
+
 `
 
 export const ButtonArea = styled.div`
-    position: absolute;
-    right: 10px;
+    margin-top: 25px;
 `
