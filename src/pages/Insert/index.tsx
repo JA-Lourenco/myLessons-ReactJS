@@ -1,5 +1,3 @@
-import { useState } from "react"
-
 import { Button } from "../../components/Button"
 import { InputForm } from "../../components/Form/InputForm"
 
@@ -18,14 +16,17 @@ import {
     Container,
     Header,
     Content,
+    LabelCheckbox,
+    Checkbox,
     ButtonArea
 } from "./styles"
-import { Checkbox } from "../../components/Checkbox"
+
 
 export interface SelectedDaysProps {
     id: number
     name: string
     checked: boolean
+    ptName: string
 }
 
 const schema = yup.object().shape({
@@ -40,47 +41,54 @@ const schema = yup.object().shape({
 const DAYS = [
     {
         id: 0,
-        name: 'Segunda-feira',
-        checked: false
+        name: 'monday',
+        checked: false,
+        ptName: 'Segunda-feira'
     },
     {
         id: 1,
-        name: 'Terça-feira',
-        checked: false
+        name: 'tuesday',
+        checked: false,
+        ptName: 'Terça-feira'
     },
     {
         id: 2,
-        name: 'Quarta-feira',
-        checked: false
+        name: 'wednesday',
+        checked: false,
+        ptName: 'Quarta-feira'
     },
     {
         id: 3,
-        name: 'Quinta-feira',
-        checked: false
+        name: 'thursday',
+        checked: false,
+        ptName: 'Quinta-feira'
     },
     {
         id: 4,
-        name: 'Sexta-feira',
-        checked: false
+        name: 'friday',
+        checked: false,
+        ptName: 'Sexta-feira'
     },
     {
         id: 5,
-        name: 'Sábado',
-        checked: false
+        name: 'saturday',
+        checked: false,
+        ptName: 'Sábado'
     },
     {
         id: 6,
-        name: 'Domingo',
-        checked: false
+        name: 'sunday',
+        checked: false,
+        ptName: 'Domingo'
     }
 ]
 
 export function Insert() {
-    const [days, setDays] = useState<SelectedDaysProps[]>(DAYS)
-
     const {
         control,
         handleSubmit,
+        register,
+        reset,
         formState: { errors }
     } = useForm({
         resolver: yupResolver(schema)
@@ -93,18 +101,20 @@ export function Insert() {
             id: String(uuidv4()),
             lesson: form.lesson,
             obs: form.obs,
-            monday: form.monday,
-            tuesday: form.tuesday,
-            wednesday: form.wednesday,
-            thursday: form.thursday,
-            friday: form.friday,
-            saturday: form.saturday,
-            sunday: form.sunday
+            monday: form.monday ? 'S' : 'N',
+            tuesday: form.tuesday ? 'S' : 'N',
+            wednesday: form.wednesday ? 'S' : 'N',
+            thursday: form.thursday ? 'S' : 'N',
+            friday: form.friday ? 'S' : 'N',
+            saturday: form.saturday ? 'S' : 'N',
+            sunday: form.sunday ? 'S' : 'N'
         }
 
         try {
             await api.post('/lessons', data)
+            alert('Matéria cadastrada com sucesso!')
             navigate('/')
+            reset()
         } catch (error) {
             console.log(error)
             alert("Não foi possível realizar o cadastro!")
@@ -133,7 +143,6 @@ export function Insert() {
                     id='Matéria'
                     name='lesson'
                     control={control}
-                    placeholder='Insira o Código'
                     error={errors.code && errors.code.message}
                 />
 
@@ -141,20 +150,23 @@ export function Insert() {
                     id='Observação'
                     name='obs'
                     control={control}
-                    placeholder='Insira o Título'
                     error={errors.title && errors.title.message}
                 />
                 
                 {
-                    days.map((item, index) => 
-                        <Checkbox 
-                            key={item.id}
-                            name={item.name}
-                            id={item.name}
-                        />
+                    DAYS.map((item) => 
+                        <LabelCheckbox key={item.id}>
+                            <Checkbox
+                                type='checkbox'
+                                key={item.id}
+                                id={item.name}
+                                {...register(`${item.name}`)}
+                            />
+
+                            {item.ptName}
+                        </LabelCheckbox>
                     )
-                }
-        
+                }      
             </Content>
 
             <ButtonArea>

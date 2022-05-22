@@ -14,40 +14,6 @@ export const Container = styled.div`
     justify-content: center;
     align-items: center;
     position: relative;
-    
-    h3, p {
-        font-size: 20px;
-        color: var(--pink);
-    }
-
-    span {
-        font-size: 16px;
-        color: var(--white);
-        display: flex;
-        flex-direction: row;
-        border: 1px solid white;
-    }
-
-    p {
-        width: 95%;
-        height: 100px;
-        padding: 8px 10px;
-        font-size: 16px;
-        color: var(--lightGray);
-        text-align: justify;
-        line-height: 25px;
-        border: 0.5px solid var(--gray);
-        border-radius: 3px;
-        
-        overflow-y: scroll;
-        ::-webkit-scrollbar {
-            width: 2px;
-            margin-right: 50px;
-        }
-        ::-webkit-scrollbar-thumb {
-            background-color: var(--pink);
-        }
-    }
 `   
 
 export const Header = styled.div`
@@ -55,6 +21,11 @@ export const Header = styled.div`
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
+`
+
+export const Name = styled.h3`
+    font-size: 20px;
+    color: var(--pink);
 `
 
 export const EditIconButton = styled.button`
@@ -69,5 +40,34 @@ export const EditIconButton = styled.button`
     &:hover {
         cursor: pointer;
         opacity: 0.5;
+    }
+`
+
+export const Days = styled.span`
+    font-size: 12px;
+    color: var(--lightGray);
+    margin: 10px 0;
+`
+
+export const Obs = styled.textarea`
+    width: 95%;
+    height: 100px;
+    padding: 5px;
+    font-size: 16px;
+    color: var(--white);
+    text-align: justify;
+    line-height: 25px;
+    background-color: var(--black);
+    border: 0.5px solid var(--gray);
+    border-radius: 3px;
+    resize: none;
+    
+    overflow-y: scroll;
+    ::-webkit-scrollbar {
+        width: 2px;
+        margin-right: 50px;
+    }
+    ::-webkit-scrollbar-thumb {
+        background-color: var(--pink);
     }
 `

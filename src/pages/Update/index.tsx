@@ -27,7 +27,7 @@ export function Update({ onOpenDeleteModal }: UpdateProps) {
             description: form.description
         }
 
-        console.log(data)
+        // console.log(data)
     }
 
     return(

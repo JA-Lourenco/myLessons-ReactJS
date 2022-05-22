@@ -81,22 +81,11 @@ export function Home() {
         } catch (error) {
             console.log('Screen: Lessons\nFunction: handleGetLessons\nerror:', error)
         } 
-
     }
     
     useEffect(() => {
         handleGetLessons()
     },[])
-
-    // useEffect(() => {
-    //     async function getData() {
-    //         const response = await api.get('/lessons')
-    //         console.log(response)
-    //         setLesson(response.data)
-    //     }
-
-    //     getData()
-    // },[])
 
     function handleAdding() {
         navigate('/insert')
@@ -105,24 +94,6 @@ export function Home() {
     function handleEdit() {
         navigate('/update')
     }
-
-    // const teste = {
-    //     banana: 1,
-    //     maca: 2,
-    //     Jheovanny: 24
-    // }
-
-    // console.log(teste.Jheovanny)
-
-    // const daysSelected = lesson.map((lesson) => {
-    //     return lesson
-    // })
-
-    // console.log(daysSelected)
-
-    // daysSelected.map(() => {
-
-    // })
 
     return (
         <Container>
@@ -144,17 +115,15 @@ export function Home() {
 
             <Content>
                 {
-                    lesson.map((item) => {
-                        console.log(item);
-                        return (
-                            <LessonCard 
-                                key={item.id}
-                                lesson={item.lesson}
-                                obs={item.obs}
-                                days={item.days}
-                                onClick={() => handleEdit()}
-                            />)
-                    })
+                    lesson.map((item) =>
+                        <LessonCard 
+                            key={item.id}
+                            lesson={item.lesson}
+                            obs={item.obs}
+                            days={item.days}
+                            onClick={handleEdit}
+                        />
+                    )
                 }
             </Content>
 
