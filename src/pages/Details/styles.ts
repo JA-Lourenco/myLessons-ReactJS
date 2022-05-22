@@ -25,11 +25,22 @@ export const Content = styled.section`
     justify-content: center;
     align-items: flex-start;
     padding: 30px;
-    /* margin-top: 30px; */
 `
 
-export const Obs = styled.h4`
+export const Obs = styled.h2`
+    color: var(--white);
+    margin-bottom: 30px;
+`
 
+export const LabelCheckbox = styled.label`
+    color: var(--white);
+    pointer-events: none;
+`
+
+export const Checkbox = styled.input`
+    margin: 20px 10px 10px 0;
+    height: 25px;
+    width: 25px;
 `
 
 export const ButtonArea = styled.div`

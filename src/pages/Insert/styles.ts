@@ -38,7 +38,6 @@ export const Checkbox = styled.input`
     width: 25px;
 `
 
-
 export const ButtonArea = styled.div`
     margin: 50px 0;
 `

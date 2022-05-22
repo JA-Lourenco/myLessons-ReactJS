@@ -1,4 +1,6 @@
+import { useEffect, useState } from "react";
 import { FiEdit } from "react-icons/fi";
+import { useNavigate } from "react-router-dom";
 import { SelectedDaysProps } from "../../pages/Insert";
 import { 
     Container, 
@@ -10,27 +12,32 @@ import {
 } from "./styles"
 
 interface LessonCardProps {
+    id: string
     lesson: string
     obs: string
     days: Array<SelectedDaysProps>
-    onClick: () => void
 }
 
 export function LessonCard({
+    id,
     lesson,
     obs,
-    days,
-    onClick
+    days
 }: LessonCardProps) {
-
     const daysSelected = days.filter((item) => item.checked)
+
+    const navigate = useNavigate()
+
+    function handleLessonEdit() {
+        navigate('/details',  { state: id } )
+    }
 
     return (
         <Container>
             <Header>
                 <Name>{lesson}</Name>
 
-                <EditIconButton onClick={onClick}>
+                <EditIconButton onClick={handleLessonEdit}>
                     <abbr title="Editar">
                         <FiEdit
                             color='#ED547C'

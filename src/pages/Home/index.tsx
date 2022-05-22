@@ -91,10 +91,6 @@ export function Home() {
         navigate('/insert')
     }
 
-    function handleEdit() {
-        navigate('/details')
-    }
-
     return (
         <Container>
             <Header>
@@ -117,11 +113,11 @@ export function Home() {
                 {
                     lesson.map((item) =>
                         <LessonCard 
+                            id={item.id}
                             key={item.id}
                             lesson={item.lesson}
                             obs={item.obs}
                             days={item.days}
-                            onClick={handleEdit}
                         />
                     )
                 }
