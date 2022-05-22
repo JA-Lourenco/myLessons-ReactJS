@@ -9,50 +9,27 @@ export const Container = styled.div`
 `
 
 export const Header = styled.header`
-    width: 80%;
+    width: 70%;
     height: 80px;
     padding: 20px;
     display: flex;
-    justify-content: space-evenly;
+    justify-content: space-around;
     align-items: center;
-    position: relative;
 `
 
-export const Content = styled.section`
+export const Content = styled.form`
     width: 40%;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: flex-start;
     padding: 30px;
-`
+    margin-top: 30px;
 
-export const Obs = styled.textarea`
-    width: 100%;
-    height: 100px;
-    padding: 5px;
-    font-size: 18px;
-    color: var(--white);
-    text-align: justify;
-    line-height: 25px;
-    background-color: var(--nightBlack);
-    border: 0.5px solid var(--gray);
-    border-radius: 3px;
-    resize: none;
-    
-    overflow-y: scroll;
-    ::-webkit-scrollbar {
-        width: 2px;
-        margin-right: 50px;
-    }
-    ::-webkit-scrollbar-thumb {
-        background-color: var(--pink);
-    }
 `
 
 export const LabelCheckbox = styled.label`
     color: var(--white);
-    pointer-events: none;
 `
 
 export const Checkbox = styled.input`
@@ -62,5 +39,5 @@ export const Checkbox = styled.input`
 `
 
 export const ButtonArea = styled.div`
-    margin-top: 25px;
+    margin: 50px 0;
 `

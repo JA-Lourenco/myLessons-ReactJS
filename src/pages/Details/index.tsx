@@ -83,6 +83,10 @@ export function Details() {
     function handleBackToHome() {
         navigate('/')
     }
+
+    function handleEditLesson() {
+        navigate('/edit', { state: id })
+    }
     
     async function handleDeleteLesson() {
         try {
@@ -136,9 +140,7 @@ export function Details() {
             <hr />
 
             <Content>
-                <Obs>
-                    {lesson?.obs}
-                </Obs>
+                    <Obs value={lesson?.obs} disabled />
                 
                 {
                     lesson?.days.map((item) => 
@@ -163,7 +165,7 @@ export function Details() {
                     <Button 
                         title='Editar'
                         color=''
-                        onClick={() => {}}
+                        onClick={handleEditLesson}
                     />
 
                     <Button 

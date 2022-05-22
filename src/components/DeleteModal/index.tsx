@@ -13,9 +13,6 @@ interface DeleteModalProps {
 }
 
 export function DeleteModal({ isOpen, onRequestClose, handleDelete }: DeleteModalProps) {
-
-    const navigate = useNavigate()
-
     return (
             <Modal
                 isOpen={isOpen}

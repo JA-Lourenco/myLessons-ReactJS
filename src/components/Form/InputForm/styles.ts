@@ -7,5 +7,5 @@ export const Container = styled.div`
 
 export const Error = styled.p`
     width: 100%;
-    color: var(--red);
+    color: var(--white);
 `

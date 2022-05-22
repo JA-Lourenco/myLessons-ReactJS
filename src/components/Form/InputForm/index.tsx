@@ -8,7 +8,7 @@ import { Container, Error } from "./styles";
 interface InputFormProps extends InputHTMLAttributes<HTMLInputElement> {
     control: Control
     name: string
-    error?: string
+    error: string
 }
 
 export function InputForm({ 

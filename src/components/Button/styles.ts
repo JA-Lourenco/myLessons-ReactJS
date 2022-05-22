@@ -15,7 +15,6 @@ export const Container = styled.button<ButtonProps>`
     border: none;
 
     &:hover {
-        cursor: pointer;
         opacity: 0.6;
         transition: all 0.6s ease;
     }

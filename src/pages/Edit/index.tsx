@@ -3,9 +3,8 @@ import { InputForm } from "../../components/Form/InputForm"
 
 import api from "../../services/api"
 
-import { v4 as uuidv4 } from 'uuid'
 import { useForm } from 'react-hook-form'
-import { useNavigate } from "react-router-dom"
+import { useLocation, useNavigate } from "react-router-dom"
 
 import * as yup from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup'
@@ -83,7 +82,7 @@ const DAYS = [
     }
 ]
 
-export function Insert() {
+export function Edit() {
     const {
         control,
         handleSubmit,
@@ -96,28 +95,28 @@ export function Insert() {
 
     const navigate = useNavigate()
 
-    async function handleSave(form: Partial<LessonDTO>) {
-        const data = {
-            id: String(uuidv4()),
-            lesson: form.lesson,
-            obs: form.obs,
-            monday: form.monday ? 'S' : 'N',
-            tuesday: form.tuesday ? 'S' : 'N',
-            wednesday: form.wednesday ? 'S' : 'N',
-            thursday: form.thursday ? 'S' : 'N',
-            friday: form.friday ? 'S' : 'N',
-            saturday: form.saturday ? 'S' : 'N',
-            sunday: form.sunday ? 'S' : 'N'
-        }
+    const {state} = useLocation();
+    const id = state
 
+    async function handleSave(form: Partial<LessonDTO>) {
         try {
-            await api.post('/lessons', data)
-            alert('Matéria cadastrada com sucesso!')
+            await api.put(`/Lessons/${id}`, {
+                lesson: form.lesson,
+                obs: form.obs,
+                monday: form.monday ? 'S' : 'N',
+                tuesday: form.tuesday ? 'S' : 'N',
+                wednesday: form.wednesday ? 'S' : 'N',
+                thursday: form.thursday ? 'S' : 'N',
+                friday: form.friday ? 'S' : 'N',
+                saturday: form.saturday ? 'S' : 'N',
+                sunday: form.sunday ? 'S' : 'N'
+            })
+            alert('Matéria alterada com sucesso!')
             navigate('/')
             reset()
         } catch (error) {
             console.log(error)
-            alert("Não foi possível realizar o cadastro!")
+            alert("Não foi possível alterar o cadastro!")
         }
     }
 
@@ -133,7 +132,7 @@ export function Insert() {
                     onClick={handleBackToHome}
                 />
 
-                <h1>Adicionar Matéria</h1>
+                <h1>Editar Matéria</h1>
             </Header>
 
             <hr />
@@ -171,7 +170,7 @@ export function Insert() {
 
             <ButtonArea>
                     <Button 
-                        title='Cadastrar'
+                        title='Editar'
                         color='#ED547C'
                         onClick={handleSubmit(handleSave)}
                     />

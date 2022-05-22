@@ -17,6 +17,10 @@ export const Header = styled.header`
     align-items: center;
 `
 
+export const TotalItems = styled.p`
+    color: var(--lightGray);
+`
+
 export const Content = styled.main`
     width: 80%;
     margin: 20px;
@@ -31,8 +35,4 @@ export const ButtonArea = styled.div`
 
 export const Footer = styled.footer`
     margin-top: 50px;
-`
-
-export const TotalItems = styled.p`
-    color: var(--lightGray);
 `

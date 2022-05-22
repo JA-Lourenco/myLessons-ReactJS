@@ -59,6 +59,10 @@ export const GlobalStyle = createGlobalStyle`
         width: 100%;
     }
 
+    button, input[type='checkbox'], label {
+        cursor: pointer;
+    }
+
     .react-modal-overlay{
         background: rgba(0, 0, 0, 0.5);
         position: fixed;
