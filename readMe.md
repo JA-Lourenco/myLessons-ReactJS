@@ -1,13 +1,13 @@
 ## Intruções para executar o projeto
 
-1 - Antes de executar o projeto React, no JSON server é importante excluir a flag do arquivo package-json do passo 2:
+Antes de iniciar o passo a passo, execute o comando abaixo para instalar as dependências do projeto React Native:
 
-<code>--host {hostname}</code>
+<code>npm install</code>
 
-2 - Execute o JSON Server
+1 - Antes de executar o projeto React, confira a instrução do JSON Server:
 
-[Acesse aqui](https://github.com/JA-Lourenco/jsonServer-MyLessons)
+[JSON Server](https://github.com/JA-Lourenco/jsonServer-MyLessons)
 
-3 - Execute o comando para abrir o projeto React
+2 - Execute o comando para abrir o projeto React
 
 <code>npm start</code> 
