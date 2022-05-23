@@ -1,6 +1,6 @@
 ## Intruções para executar o projeto
 
-Antes de iniciar o passo a passo, execute o comando abaixo para instalar as dependências do projeto React Native:
+Antes de iniciar o passo a passo, execute o comando abaixo para instalar as dependências do projeto React:
 
 <code>npm install</code>
 
