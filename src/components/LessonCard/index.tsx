@@ -48,7 +48,7 @@ export function LessonCard({
 
             <Days>            
                 {
-                    daysSelected.map((day) => day.name).join(', ')
+                    daysSelected.map((day) => day.ptName).join(', ')
                 }
             </Days>
 

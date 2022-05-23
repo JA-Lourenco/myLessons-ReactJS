@@ -4,6 +4,7 @@ import api from "../../services/api"
 
 import { Button } from "../../components/Button"
 import { LessonCard } from "../../components/LessonCard"
+import { Load } from "../../components/Load"
 
 import { LessonDTO } from "../../dtos/LessonDTO"
 import { DAYS } from "../../dtos/DAYSDTO"
@@ -11,6 +12,7 @@ import { DAYS } from "../../dtos/DAYSDTO"
 import { useNavigate } from "react-router-dom"
 
 import { 
+    LoadContainer,
     Container,
     Header,
     Content,
@@ -20,10 +22,13 @@ import {
 
 export function Home() {
     const [lesson, setLesson] = useState<LessonDTO[]>([])
+    const [loading, setLoading] = useState(false)
 
     const navigate = useNavigate()
 
     async function handleGetLessons() {
+        setLoading(true)
+
         try {
             const response = await api.get('/Lessons')
             let tempArray = response.data.map((item: any) => {
@@ -44,7 +49,9 @@ export function Home() {
         } catch (error) {
             alert('Não foi possível carregar os registros!')
             console.log('Screen: Lessons\nFunction: handleGetLessons\nerror:', error)
-        } 
+        } finally {
+            setLoading(false)
+        }
     }
     
     useEffect(() => {
@@ -56,39 +63,46 @@ export function Home() {
     }
 
     return (
-        <Container>
-            <Header>
-                <h1>Home</h1>
+        <>
+            {
+                loading 
+                ? <LoadContainer> <Load title="Carregando..."/> </LoadContainer>
+                :
+                <Container>
+                    <Header>
+                        <h1>Home</h1>
 
-                <TotalItems>Você possui um total de {lesson.length} itens</TotalItems>
+                        <TotalItems>Você possui um total de {lesson.length} itens</TotalItems>
 
-                <ButtonArea>
-                    <Button 
-                        title='+ Adicionar'
-                        color='#ED547C'
-                        onClick={handleAdding}
-                    />
-                </ButtonArea>
-            </Header>
+                        <ButtonArea>
+                            <Button 
+                                title='+ Adicionar'
+                                color='#ED547C'
+                                onClick={handleAdding}
+                            />
+                        </ButtonArea>
+                    </Header>
 
-            <hr />
+                    <hr />
 
-            <Content>
-                {
-                    lesson.map((item) =>
-                        <LessonCard 
-                            id={item.id}
-                            key={item.id}
-                            lesson={item.lesson}
-                            obs={item.obs}
-                            days={item.days}
-                        />
-                    )
-                }
-            </Content>
+                    <Content>
+                        {
+                            lesson.map((item) =>
+                                <LessonCard 
+                                    id={item.id}
+                                    key={item.id}
+                                    lesson={item.lesson}
+                                    obs={item.obs}
+                                    days={item.days}
+                                />
+                            )
+                        }
+                    </Content>
 
-            <hr />
-        </Container>
+                    <hr />
+                </Container>
+            }
+        </>
     )
 }
 

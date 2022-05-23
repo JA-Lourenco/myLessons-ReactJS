@@ -18,6 +18,13 @@ export const Header = styled.header`
     position: relative;
 `
 
+export const LoadContainer = styled.div`
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 200px;
+`
+
 export const Content = styled.section`
     width: 40%;
     display: flex;

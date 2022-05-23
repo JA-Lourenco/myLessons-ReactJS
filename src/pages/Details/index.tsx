@@ -4,6 +4,7 @@ import api from "../../services/api";
 
 import { Button } from "../../components/Button"
 import { DeleteModal } from "../../components/DeleteModal";
+import { Load } from "../../components/Load";
 
 import { LessonDTO } from "../../dtos/LessonDTO";
 import { DAYS } from "../../dtos/DAYSDTO";
@@ -13,6 +14,7 @@ import { useLocation, useNavigate } from "react-router-dom";
 import { 
     Container,
     Header,
+    LoadContainer,
     Content,
     Obs,
     LabelCheckbox,
@@ -23,6 +25,7 @@ import {
 export function Details() {
     const [lesson, setLesson] = useState<LessonDTO>()
     const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false)
+    const [loading, setLoading] = useState(true)
 
     const navigate = useNavigate()
 
@@ -76,7 +79,9 @@ export function Details() {
             } catch (error) {
                 console.log('Screen: Details\nFunction: handleGetLesson\nerror:', error)
                 alert('Não foi possível carregar os dados da Matéria!')
-            } 
+            } finally {
+                setLoading(false)
+            }
         }
 
         handleGetLesson()
@@ -95,25 +100,30 @@ export function Details() {
 
             <hr />
 
-            <Content>
-                    <Obs value={lesson?.obs} disabled />
-                
-                {
-                    lesson?.days.map((item) => 
-                        <LabelCheckbox key={item.id}>
-                            <Checkbox
-                                type='checkbox'
-                                key={item.id}
-                                checked={item.checked}
-                                readOnly
-                            />
+            {
+                loading 
+                ? <LoadContainer> <Load title="Carregando..."/> </LoadContainer>
+                :
+                <Content>
+                        <Obs value={lesson?.obs} disabled />
+                    
+                    {
+                        lesson?.days.map((item) => 
+                            <LabelCheckbox key={item.id}>
+                                <Checkbox
+                                    type='checkbox'
+                                    key={item.id}
+                                    checked={item.checked}
+                                    readOnly
+                                />
 
-                            {item.ptName}
-                        </LabelCheckbox>
-                    )
-                }
-                
-            </Content>
+                                {item.ptName}
+                            </LabelCheckbox>
+                        )
+                    }
+                    
+                </Content>
+            }
 
             <hr />
 

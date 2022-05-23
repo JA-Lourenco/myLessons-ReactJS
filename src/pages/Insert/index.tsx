@@ -1,5 +1,8 @@
+import { useState } from "react"
+
 import { Button } from "../../components/Button"
 import { InputForm } from "../../components/Form/InputForm"
+import { Load } from "../../components/Load"
 
 import api from "../../services/api"
 
@@ -16,6 +19,7 @@ import { DAYS } from "../../dtos/DAYSDTO"
 import { 
     Container,
     Header,
+    LoadContainer,
     Content,
     LabelCheckbox,
     Checkbox,
@@ -32,6 +36,8 @@ const schema = yup.object().shape({
 })
 
 export function Insert() {
+    const [loading, setLoading] = useState(false)
+
     const {
         control,
         handleSubmit,
@@ -45,6 +51,8 @@ export function Insert() {
     const navigate = useNavigate()
 
     async function handleSave(form: Partial<LessonDTO>) {
+        setLoading(true)
+
         const data = {
             id: String(uuidv4()),
             lesson: form.lesson,
@@ -66,6 +74,8 @@ export function Insert() {
         } catch (error) {
             console.log(error)
             alert("Não foi possível realizar o cadastro!")
+        } finally {
+            setLoading(false)
         }
     }
 
@@ -86,44 +96,50 @@ export function Insert() {
 
             <hr />
 
-            <Content>
-                <InputForm 
-                    id='Matéria'
-                    name='lesson'
-                    control={control}
-                    error={errors.code && errors.code.message}
-                />
+            {
+                loading ? <LoadContainer> <Load title='Adicionando...' /> </LoadContainer>
+                :
+                <>
+                    <Content>
+                        <InputForm 
+                            id='Matéria'
+                            name='lesson'
+                            control={control}
+                            error={errors.code && errors.code.message}
+                        />
 
-                <InputForm 
-                    id='Observação'
-                    name='obs'
-                    control={control}
-                    error={errors.title && errors.title.message}
-                />
-                
-                {
-                    DAYS.map((item) => 
-                        <LabelCheckbox key={item.id}>
-                            <Checkbox
-                                type='checkbox'
-                                key={item.id}
-                                id={item.name}
-                                {...register(`${item.name}`)}
+                        <InputForm 
+                            id='Observação'
+                            name='obs'
+                            control={control}
+                            error={errors.title && errors.title.message}
+                        />
+                        
+                        {
+                            DAYS.map((item) => 
+                                <LabelCheckbox key={item.id}>
+                                    <Checkbox
+                                        type='checkbox'
+                                        key={item.id}
+                                        id={item.name}
+                                        {...register(`${item.name}`)}
+                                    />
+
+                                    {item.ptName}
+                                </LabelCheckbox>
+                            )
+                        }      
+                    </Content>
+
+                    <ButtonArea>
+                            <Button 
+                                title='Cadastrar'
+                                color='#ED547C'
+                                onClick={handleSubmit(handleSave)}
                             />
-
-                            {item.ptName}
-                        </LabelCheckbox>
-                    )
-                }      
-            </Content>
-
-            <ButtonArea>
-                    <Button 
-                        title='Cadastrar'
-                        color='#ED547C'
-                        onClick={handleSubmit(handleSave)}
-                    />
-            </ButtonArea>
+                    </ButtonArea>
+                </>
+            }
 
             <hr />
         </Container>

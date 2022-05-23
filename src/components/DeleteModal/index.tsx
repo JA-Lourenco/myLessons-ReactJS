@@ -2,8 +2,6 @@ import Modal from 'react-modal'
 
 import { Button } from '../Button'
 
-import { useNavigate } from 'react-router-dom'
-
 import { Container, ButtonArea } from './styles'
 
 interface DeleteModalProps {
@@ -14,31 +12,31 @@ interface DeleteModalProps {
 
 export function DeleteModal({ isOpen, onRequestClose, handleDelete }: DeleteModalProps) {
     return (
-            <Modal
-                isOpen={isOpen}
-                onRequestClose={onRequestClose}
-                overlayClassName='react-modal-overlay'
-                className='react-modal-content'
-            >
-                <Container>
-                    <h2>Atenção</h2>
+        <Modal
+            isOpen={isOpen}
+            onRequestClose={onRequestClose}
+            overlayClassName='react-modal-overlay'
+            className='react-modal-content'
+        >
+            <Container>
+                <h2>Atenção</h2>
 
-                    <p>Confirma a remoção da matéria?</p>
+                <p>Confirma a remoção da matéria?</p>
 
-                    <ButtonArea>
-                        <Button 
-                            title='Cancelar'
-                            onClick={onRequestClose}
-                        />
+                <ButtonArea>
+                    <Button 
+                        title='Cancelar'
+                        onClick={onRequestClose}
+                    />
 
-                        <Button 
-                            title='Confirmar'
-                            color='#5429CC'
-                            onClick={handleDelete}
-                        />
-                    </ButtonArea>
-                </Container>
-            </Modal>
+                    <Button 
+                        title='Confirmar'
+                        color='#5429CC'
+                        onClick={handleDelete}
+                    />
+                </ButtonArea>
+            </Container>
+        </Modal>
         
     )
 }

@@ -17,6 +17,10 @@ export const Header = styled.header`
     align-items: center;
 `
 
+export const LoadContainer = styled.div`
+    margin: 200px 0;
+`
+
 export const Content = styled.form`
     width: 40%;
     display: flex;
