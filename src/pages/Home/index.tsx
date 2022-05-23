@@ -6,6 +6,7 @@ import { Button } from "../../components/Button"
 import { LessonCard } from "../../components/LessonCard"
 
 import { LessonDTO } from "../../dtos/LessonDTO"
+import { DAYS } from "../../dtos/DAYSDTO"
 
 import { useNavigate } from "react-router-dom"
 
@@ -16,44 +17,6 @@ import {
     ButtonArea,
     TotalItems
 } from "./styles"
-
-const DAYS = [
-    {
-        id: 0,
-        name: 'Segunda',
-        checked: false
-    },
-    {
-        id: 1,
-        name: 'Terça',
-        checked: false
-    },
-    {
-        id: 2,
-        name: 'Quarta',
-        checked: false
-    },
-    {
-        id: 3,
-        name: 'Quinta',
-        checked: false
-    },
-    {
-        id: 4,
-        name: 'Sexta',
-        checked: false
-    },
-    {
-        id: 5,
-        name: 'Sábado',
-        checked: false
-    },
-    {
-        id: 6,
-        name: 'Domingo',
-        checked: false
-    }
-]
 
 export function Home() {
     const [lesson, setLesson] = useState<LessonDTO[]>([])
@@ -79,6 +42,7 @@ export function Home() {
             setLesson(tempArray)
 
         } catch (error) {
+            alert('Não foi possível carregar os registros!')
             console.log('Screen: Lessons\nFunction: handleGetLessons\nerror:', error)
         } 
     }

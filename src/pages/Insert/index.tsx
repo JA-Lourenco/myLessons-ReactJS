@@ -11,6 +11,7 @@ import * as yup from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup'
 
 import { LessonDTO } from "../../dtos/LessonDTO"
+import { DAYS } from "../../dtos/DAYSDTO"
 
 import { 
     Container,
@@ -21,14 +22,6 @@ import {
     ButtonArea
 } from "./styles"
 
-
-export interface SelectedDaysProps {
-    id: number
-    name: string
-    checked: boolean
-    ptName: string
-}
-
 const schema = yup.object().shape({
     lesson: yup
         .string()
@@ -37,51 +30,6 @@ const schema = yup.object().shape({
         .string()
         .required('O campo Observação deve ser preenchido!'),
 })
-
-const DAYS = [
-    {
-        id: 0,
-        name: 'monday',
-        checked: false,
-        ptName: 'Segunda-feira'
-    },
-    {
-        id: 1,
-        name: 'tuesday',
-        checked: false,
-        ptName: 'Terça-feira'
-    },
-    {
-        id: 2,
-        name: 'wednesday',
-        checked: false,
-        ptName: 'Quarta-feira'
-    },
-    {
-        id: 3,
-        name: 'thursday',
-        checked: false,
-        ptName: 'Quinta-feira'
-    },
-    {
-        id: 4,
-        name: 'friday',
-        checked: false,
-        ptName: 'Sexta-feira'
-    },
-    {
-        id: 5,
-        name: 'saturday',
-        checked: false,
-        ptName: 'Sábado'
-    },
-    {
-        id: 6,
-        name: 'sunday',
-        checked: false,
-        ptName: 'Domingo'
-    }
-]
 
 export function Insert() {
     const {

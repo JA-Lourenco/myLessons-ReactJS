@@ -6,6 +6,7 @@ import { Button } from "../../components/Button"
 import { DeleteModal } from "../../components/DeleteModal";
 
 import { LessonDTO } from "../../dtos/LessonDTO";
+import { DAYS } from "../../dtos/DAYSDTO";
 
 import { useLocation, useNavigate } from "react-router-dom";
 
@@ -18,51 +19,6 @@ import {
     Checkbox,
     ButtonArea
 } from "./styles"
-
-const DAYS = [
-    {
-        id: 0,
-        name: 'monday',
-        checked: false,
-        ptName: 'Segunda-feira'
-    },
-    {
-        id: 1,
-        name: 'tuesday',
-        checked: false,
-        ptName: 'Terça-feira'
-    },
-    {
-        id: 2,
-        name: 'wednesday',
-        checked: false,
-        ptName: 'Quarta-feira'
-    },
-    {
-        id: 3,
-        name: 'thursday',
-        checked: false,
-        ptName: 'Quinta-feira'
-    },
-    {
-        id: 4,
-        name: 'friday',
-        checked: false,
-        ptName: 'Sexta-feira'
-    },
-    {
-        id: 5,
-        name: 'saturday',
-        checked: false,
-        ptName: 'Sábado'
-    },
-    {
-        id: 6,
-        name: 'sunday',
-        checked: false,
-        ptName: 'Domingo'
-    }
-]
 
 export function Details() {
     const [lesson, setLesson] = useState<LessonDTO>()

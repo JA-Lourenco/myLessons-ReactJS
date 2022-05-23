@@ -1,7 +1,6 @@
-import { useEffect, useState } from "react";
 import { FiEdit } from "react-icons/fi";
 import { useNavigate } from "react-router-dom";
-import { SelectedDaysProps } from "../../pages/Insert";
+import { SelectedDaysProps } from "../../dtos/LessonDTO";
 import { 
     Container, 
     Header, 
