@@ -104,14 +104,14 @@ export function Edit() {
                             id='Matéria'
                             name='lesson'
                             control={control}
-                            error={errors.code && errors.code.message}
+                            error={errors.lesson && errors.lesson.message}
                         />
 
                         <InputForm 
                             id='Observação'
                             name='obs'
                             control={control}
-                            error={errors.title && errors.title.message}
+                            error={errors.obs && errors.obs.message}
                         />
                         
                         {
