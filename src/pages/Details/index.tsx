@@ -1,151 +1,170 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState } from "react"
 
-import api from "../../services/api";
+import api from "../../services/api"
 
 import { Button } from "../../components/Button"
-import { DeleteModal } from "../../components/DeleteModal";
-import { Load } from "../../components/Load";
+import { DeleteModal } from "../../components/DeleteModal"
+import { Load } from "../../components/Load"
 
-import { LessonDTO } from "../../dtos/LessonDTO";
-import { DAYS } from "../../dtos/DAYSDTO";
+import { LessonDTO } from "../../dtos/LessonDTO"
+import { DAYS } from "../../dtos/DAYSDTO"
 
-import { useLocation, useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom"
 
-import { 
-    Container,
-    Header,
-    LoadContainer,
-    Content,
-    Obs,
-    LabelCheckbox,
-    Checkbox,
-    ButtonArea
+import {
+	Container,
+	Header,
+	LoadContainer,
+	Content,
+	Obs,
+	LabelCheckbox,
+	Checkbox,
+	ButtonArea,
 } from "./styles"
 
 export function Details() {
-    const [lesson, setLesson] = useState<LessonDTO>()
-    const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false)
-    const [loading, setLoading] = useState(true)
+	const [lesson, setLesson] = useState<LessonDTO>()
+	const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false)
+	const [loading, setLoading] = useState(true)
 
-    const navigate = useNavigate()
+	const navigate = useNavigate()
 
-    const {state} = useLocation();
-    const id = state
+	const { state } = useLocation()
+	const id = state
 
-    function handleIsDeleteModalOpen() {
-        setIsDeleteModalOpen(true)
-    } 
-    function handleIsDeleteModalClose() {
-        setIsDeleteModalOpen(false)
-    }
+	function handleIsDeleteModalOpen() {
+		setIsDeleteModalOpen(true)
+	}
+	function handleIsDeleteModalClose() {
+		setIsDeleteModalOpen(false)
+	}
 
-    function handleBackToHome() {
-        navigate('/')
-    }
+	function handleBackToHome() {
+		navigate("/")
+	}
 
-    function handleEditLesson() {
-        navigate('/edit', { state: id })
-    }
-    
-    async function handleDeleteLesson() {
-        try {
-            await api.delete(`/Lessons/${id}`)
-            alert('Registro removido com sucesso!')
-            navigate('/')
-        } catch (error) {
-            console.log('Screen: Details\nFunction: handleDeleteLesson\nerror:', error)
-            alert('Não foi possível remover o registro!')
-        }
-    }
+	function handleEditLesson() {
+		navigate("/edit", { state: id })
+	}
 
-    useEffect(() => {
-        async function handleGetLesson() {
-            try {
-                const response = await api.get(`/Lessons/${id}`)
+	async function handleDeleteLesson() {
+		handleIsDeleteModalClose()
+		setLoading(true)
 
-                console.log(response)
-                
-                let temp = []
-                temp.push({...DAYS[0], checked: response.data.monday === 'S' ? true : false})
-                temp.push({...DAYS[1], checked: response.data.tuesday === 'S' ? true : false})
-                temp.push({...DAYS[2], checked: response.data.wednesday === 'S' ? true : false})
-                temp.push({...DAYS[3], checked: response.data.thursday === 'S' ? true : false})
-                temp.push({...DAYS[4], checked: response.data.friday === 'S' ? true : false})
-                temp.push({...DAYS[5], checked: response.data.saturday === 'S' ? true : false})
-                temp.push({...DAYS[6], checked: response.data.sunday === 'S' ? true : false})
-    
-                setLesson({...response.data, days: temp})
-    
-            } catch (error) {
-                console.log('Screen: Details\nFunction: handleGetLesson\nerror:', error)
-                alert('Não foi possível carregar os dados da Matéria!')
-            } finally {
-                setLoading(false)
-            }
-        }
+		try {
+			await api.delete(`/Lessons/${id}`)
+			navigate("/")
+		} catch (error) {
+			console.log(
+				"Screen: Details\nFunction: handleDeleteLesson\nerror:",
+				error
+			)
+			alert("Não foi possível remover o registro!")
+		} finally {
+			setLoading(false)
+		}
+	}
 
-        handleGetLesson()
-    },[id])
-    
-    return(
-        <Container>
-            <Header>
-                <Button 
-                    title='Home'
-                    onClick={handleBackToHome}
-                />
+	useEffect(() => {
+		async function handleGetLesson() {
+			try {
+				const response = await api.get(`/Lessons/${id}`)
 
-                <h1>{lesson?.lesson}</h1>
-            </Header>
+				console.log(response)
 
-            <hr />
+				let temp = []
+				temp.push({
+					...DAYS[0],
+					checked: response.data.monday === "S" ? true : false,
+				})
+				temp.push({
+					...DAYS[1],
+					checked: response.data.tuesday === "S" ? true : false,
+				})
+				temp.push({
+					...DAYS[2],
+					checked: response.data.wednesday === "S" ? true : false,
+				})
+				temp.push({
+					...DAYS[3],
+					checked: response.data.thursday === "S" ? true : false,
+				})
+				temp.push({
+					...DAYS[4],
+					checked: response.data.friday === "S" ? true : false,
+				})
+				temp.push({
+					...DAYS[5],
+					checked: response.data.saturday === "S" ? true : false,
+				})
+				temp.push({
+					...DAYS[6],
+					checked: response.data.sunday === "S" ? true : false,
+				})
 
-            {
-                loading 
-                ? <LoadContainer> <Load title="Carregando..."/> </LoadContainer>
-                :
-                <Content>
-                        <Obs value={lesson?.obs} disabled />
-                    
-                    {
-                        lesson?.days.map((item) => 
-                            <LabelCheckbox key={item.id}>
-                                <Checkbox
-                                    type='checkbox'
-                                    key={item.id}
-                                    checked={item.checked}
-                                    readOnly
-                                />
+				setLesson({ ...response.data, days: temp })
+			} catch (error) {
+				console.log("Screen: Details\nFunction: handleGetLesson\nerror:", error)
+				alert("Não foi possível carregar os dados da Matéria!")
+			} finally {
+				setLoading(false)
+			}
+		}
 
-                                {item.ptName}
-                            </LabelCheckbox>
-                        )
-                    }
-                    
-                </Content>
-            }
+		handleGetLesson()
+	}, [id])
 
-            <hr />
+	return (
+		<Container>
+			<Header>
+				<Button title="Home" onClick={handleBackToHome} />
 
-            <ButtonArea>
-                    <Button 
-                        title='Editar'
-                        color=''
-                        onClick={handleEditLesson}
-                    />
+				<h1>{lesson?.lesson}</h1>
+			</Header>
 
-                    <Button 
-                        title='Excluir'
-                        color='#5429CC'
-                        onClick={handleIsDeleteModalOpen}
-                    />
-            </ButtonArea>
+			<hr />
 
-            <DeleteModal 
-                isOpen={isDeleteModalOpen}
-                onRequestClose={handleIsDeleteModalClose}
-                handleDelete={handleDeleteLesson}
-            />
-        </Container>
-    )
+			{loading ? (
+				<LoadContainer>
+					{" "}
+					<Load title="Carregando..." />{" "}
+				</LoadContainer>
+			) : (
+				<Content>
+					<Obs value={lesson?.obs} disabled />
+
+					{lesson?.days.map((item) => (
+						<LabelCheckbox key={item.id}>
+							<Checkbox
+								type="checkbox"
+								key={item.id}
+								checked={item.checked}
+								readOnly
+							/>
+
+							{item.ptName}
+						</LabelCheckbox>
+					))}
+				</Content>
+			)}
+
+			<hr />
+
+			<ButtonArea>
+				<Button title="Editar" color="" onClick={handleEditLesson} />
+
+				<Button
+					title="Excluir"
+					color="#5429CC"
+					onClick={handleIsDeleteModalOpen}
+				/>
+			</ButtonArea>
+
+			<DeleteModal
+				isOpen={isDeleteModalOpen}
+				onRequestClose={handleIsDeleteModalClose}
+				handleDelete={handleDeleteLesson}
+			/>
+		</Container>
+	)
 }

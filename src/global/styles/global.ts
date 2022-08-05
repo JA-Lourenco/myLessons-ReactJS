@@ -1,4 +1,4 @@
-import { createGlobalStyle } from "styled-components";
+import { createGlobalStyle } from "styled-components"
 
 export const GlobalStyle = createGlobalStyle`
     :root {
@@ -14,6 +14,7 @@ export const GlobalStyle = createGlobalStyle`
         --red: #8B0000;
         --pink: #ED547C;
         --purple: #5429CC;
+        --yellow: #FFA630;
 
         /* Alternatives: #F5F5F5 #b5d3f0 #90B6DB #486493 */
     }
@@ -87,4 +88,3 @@ export const GlobalStyle = createGlobalStyle`
         position: relative;
     }
 `
-

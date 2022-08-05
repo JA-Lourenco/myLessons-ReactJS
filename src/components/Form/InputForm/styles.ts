@@ -1,11 +1,11 @@
-import styled from "styled-components";
+import styled from "styled-components"
 
 export const Container = styled.div`
-    width: 100%;
-    margin-top: 20px;
+	width: 100%;
+	margin-top: 20px;
 `
 
 export const Error = styled.p`
-    width: 100%;
-    color: var(--white);
+	width: 100%;
+	color: var(--yellow);
 `
